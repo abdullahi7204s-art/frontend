@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: system-ui;
+}
+
+/* BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 20%, #7c3aed, transparent),
+              radial-gradient(circle at 80% 30%, #06b6d4, transparent),
+              radial-gradient(circle at 50% 80%, #ec4899, transparent);
+  animation: moveBg 20s linear infinite;
+  z-index: -1;
+  opacity: 0.25;
+}
+
+@keyframes moveBg {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(-20%, -20%); }
+  100% { transform: translate(0,0); }
+}
+
+/* GLASS */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+.glass:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(124,58,237,0.3);
+}
+
+/* SIDEBAR */
+.sidebar-item:hover {
+  transform: translateX(6px);
+}
+
+/* ACTIVE */
+.active-tab {
+  background: linear-gradient(135deg,#7c3aed,#06b6d4);
+}
+
+/* BUTTON */
+.glow-btn {
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 20px #22c55e;
+}
