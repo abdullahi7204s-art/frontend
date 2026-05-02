@@ -8,7 +8,7 @@ import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid
 } from "recharts";
 
-const API_URL = "https://backend-2-d4e9.onrender.com";
+const API = "https://backend-2-d4e9.onrender.com";
 
 const categories = [
   "🍔 Food","⚡ Utilities","🏠 Rent","🎓 Education",
