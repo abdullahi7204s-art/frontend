@@ -58,3 +58,7 @@ body::before {
 .glow-btn:hover {
   box-shadow: 0 0 20px #22c55e;
 }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
