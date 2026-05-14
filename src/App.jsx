@@ -203,9 +203,9 @@ export default function App() {
     return (
       <div className="min-h-screen flex flex-col md:flex-row bg-[#020617] text-white">
         {/* Left Side: Info */}
-        <div className="md:w-1/2 p-12 flex flex-col justify-center bg-gradient-to-br from-purple-900/20 to-transparent border-r border-white/5">
+        <div className="md:w-1/2 p-6 md:p-12 flex flex-col justify-center bg-gradient-to-br from-purple-900/20 to-transparent border-r border-white/5">
           <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}}>
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               SpendSmart
             </h1>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
@@ -239,8 +239,8 @@ export default function App() {
         </div>
 
         {/* Right Side: Form */}
-        <div className="md:w-1/2 flex items-center justify-center p-8">
-          <motion.div initial={{scale:0.95}} animate={{scale:1}} className="bg-white/5 p-10 rounded-2xl w-full max-w-md border border-white/10 backdrop-blur-md">
+        <div className="md:w-1/2 flex items-center justify-center p-4 md:p-8">
+          <motion.div initial={{scale:0.95}} animate={{scale:1}} className="bg-white/5 p-5 md:p-10 rounded-2xl w-full max-w-md border border-white/10 backdrop-blur-md">
             <h2 className="text-2xl font-bold mb-2 text-center">{isRegistering ? "Create Account" : "Welcome Back"}</h2>
             <p className="text-gray-500 text-center mb-8 text-sm">Enter your details to access your dashboard</p>
 
@@ -271,10 +271,10 @@ export default function App() {
   const logout = () => setUser(null);
 
   return (
-    <div className="flex h-screen text-white bg-gradient-to-br from-[#020617] via-[#0f172a] to-black">
+    <div className="flex flex-col md:flex-row min-h-screen text-white bg-gradient-to-br from-[#020617] via-[#0f172a] to-black overflow-x-hidden">
 
       {/* SIDEBAR */}
-      <div className="w-64 p-5 backdrop-blur-xl bg-white/5 border-r border-white/10">
+      <div className="w-full md:w-64 p-5 backdrop-blur-xl bg-white/5 border-r border-white/10">
         <div className="mb-8">
           <h1 className="text-xl font-bold">💰 SpendSmart</h1>
           <p className="text-xs text-purple-400 font-medium">Welcome, {user.username}</p>
@@ -314,26 +314,26 @@ export default function App() {
       </div>
 
       {/* MAIN */}
-      <div className="flex-1 p-8 overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-8">Hello, {user.username} 👋</h1>
+      <div className="flex-1 p-4 md:p-8 overflow-y-auto overflow-x-hidden">
+        <h1 className="text-2xl md:text-3xl font-bold mb-8">Hello, {user.username} 👋</h1>
 
         {activeTab==="dashboard" && (
           <>
-            <div className="grid grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
               <div className="p-6 bg-white/5 rounded-xl"><p>💸 Gross Expenditure</p><h2 className="text-pink-400 text-2xl font-bold">KSh {totalSpent}</h2></div>
               <div className="p-6 bg-white/5 rounded-xl"><p>📊 Status</p><h2 className={remaining<0?"text-red-400":"text-green-400"}>KSh {remaining}</h2></div>
               <div className="p-6 bg-white/5 rounded-xl"><p>🧾 Transactions</p><h2 className="text-yellow-400 text-2xl font-bold">{expenses.length}</h2></div>
             </div>
             <div className="p-5 mb-6 bg-white/5 rounded-xl"><h2 className="mb-2">🤖 Smart Insights</h2>{insights.map((i,idx)=>(<p key={idx} className="text-yellow-300">{i}</p>))}</div>
-            <div className="grid grid-cols-3 gap-6">
-              <div className="col-span-2 p-6 bg-white/5 rounded-xl"><h2>🧾 New Transaction</h2>
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+              <div className="xl:col-span-2 p-6 bg-white/5 rounded-xl"><h2>🧾 New Transaction</h2>
                 <input placeholder="Description" value={form.description} onChange={e=>setForm({...form,description:e.target.value})} className="w-full mb-2 p-2 bg-black/40 rounded"/>
                 <input placeholder="Amount" value={form.amount} onChange={e=>setForm({...form,amount:e.target.value})} className="w-full mb-2 p-2 bg-black/40 rounded"/>
                 <select value={form.category} onChange={e=>setForm({...form,category:e.target.value})} className="w-full mb-3 p-2 bg-black/40 rounded">{categories.map(c=><option key={c}>{c}</option>)}</select>
                 <button onClick={addExpense} className="w-full bg-purple-600 p-2 rounded">Commit</button>
               </div>
               {/* FIXED SCROLLABLE CHART CONTAINER */}
-              <div className="p-6 bg-white/5 rounded-xl h-[320px] overflow-y-auto">
+              <div className="p-4 md:p-6 bg-white/5 rounded-xl h-[300px] md:h-[320px] overflow-y-auto">
                 <div style={{ height: `${categories.length * 40}px`, minWidth: '100%' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart layout="vertical" data={chartData} margin={{ left: 20 }}>
@@ -352,11 +352,11 @@ export default function App() {
 
         {activeTab==="reports" && (
           <div className="space-y-6">
-            <div className="flex justify-between items-center p-6 bg-purple-900/20 rounded-xl border border-purple-500/30">
+            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 p-4 bg-purple-900/20 rounded-xl border border-purple-500/30">
               <div><h2 className="text-2xl font-bold">Monthly Report</h2><p className="text-gray-400">Archive current data to view in Yearly Wrapped</p></div>
               <button onClick={saveAndResetMonth} className="flex items-center gap-2 bg-purple-600 px-4 py-2 rounded-lg font-bold hover:bg-purple-700"><FileText size={20}/> Save & Reset Month</button>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
               <div className="p-6 bg-white/5 rounded-xl">
                 <div className="flex justify-between mb-4"><h2 className="text-xl font-bold flex items-center gap-2"><Calendar className="text-pink-400"/> Yearly Wrapped</h2><button onClick={()=>downloadPDF("Yearly_Wrapped", getYearlyWrapped())} className="text-xs bg-white/10 p-2 rounded hover:bg-white/20">Download Report</button></div>
                 <div className="h-[300px]"><ResponsiveContainer width="100%" height="100%"><BarChart data={getYearlyWrapped()}><CartesianGrid strokeDasharray="3 3" stroke="#333"/><XAxis dataKey="name" hide/><YAxis /><Tooltip /><Bar dataKey="amount" fill="#ec4899"/></BarChart></ResponsiveContainer></div>
@@ -394,7 +394,7 @@ export default function App() {
         )}
 
         {activeTab==="goals" && (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div className="p-6 bg-white/5 rounded-xl">
               <h2 className="text-xl font-bold mb-3">💰 Savings Goals</h2>
               {["name","target","saved","monthly"].map(field=>(
@@ -402,12 +402,12 @@ export default function App() {
               ))}
               <button onClick={()=>{if(!goalForm.name || !goalForm.target) return; setGoals(prev=>[...prev,{name:goalForm.name,target:+goalForm.target,saved:+goalForm.saved||0,monthly:+goalForm.monthly||0}]); setGoalForm({name:"",target:"",saved:"",monthly:""});}} className="w-full mt-3 bg-blue-600 p-3 rounded">➕ Add Goal</button>
             </div>
-            <div>{goals.map((g,i)=>{const remaining=g.target-g.saved; const months=g.monthly?Math.ceil(remaining/g.monthly):0; return(<div key={i} className="p-5 mb-4 bg-white/5 rounded-xl"><h3 className="text-lg font-bold mb-3">🎯 {g.name}</h3><div className="grid grid-cols-2 gap-3 text-sm"><p className="text-blue-400">🎯 Target: {g.target}</p><p className="text-green-400">💰 Saved: {g.saved}</p><p className="text-yellow-400">📉 Remaining: {remaining}</p><p className="text-purple-400">⏳ Months: {months}</p></div><input placeholder="➕ Update saved" className="w-full mt-3 p-2 bg-black/40 rounded" onChange={(e)=>{const newGoals=[...goals]; newGoals[i].saved=Number(e.target.value); setGoals(newGoals);}}/>{remaining<=0 && (<p className="text-green-400 mt-3 font-bold text-lg">🎉🔥 LEGEND! You crushed your goal! 🚀💰</p>)}</div>)})}</div>
+            <div>{goals.map((g,i)=>{const remaining=g.target-g.saved; const months=g.monthly?Math.ceil(remaining/g.monthly):0; return(<div key={i} className="p-5 mb-4 bg-white/5 rounded-xl"><h3 className="text-lg font-bold mb-3">🎯 {g.name}</h3><div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm"><p className="text-blue-400">🎯 Target: {g.target}</p><p className="text-green-400">💰 Saved: {g.saved}</p><p className="text-yellow-400">📉 Remaining: {remaining}</p><p className="text-purple-400">⏳ Months: {months}</p></div><input placeholder="➕ Update saved" className="w-full mt-3 p-2 bg-black/40 rounded" onChange={(e)=>{const newGoals=[...goals]; newGoals[i].saved=Number(e.target.value); setGoals(newGoals);}}/>{remaining<=0 && (<p className="text-green-400 mt-3 font-bold text-lg">🎉🔥 LEGEND! You crushed your goal! 🚀💰</p>)}</div>)})}</div>
           </div>
         )}
 
         {activeTab==="budgets" && (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {categories.map(cat=>{
               const spent=categoryTotal(cat); const limit=budgets[cat]||0; const daysRemaining = calculateDaysLeft(spent, limit);
               return(<div key={cat} className="p-4 bg-white/5 rounded-xl"><h3>{cat}</h3><input placeholder="Limit" onChange={e=>setBudgets({...budgets,[cat]:Number(e.target.value)})} className="w-full p-2 mt-2 bg-black/40 rounded"/><p className={spent>limit?"text-red-400":"text-green-400"}>{spent} / {limit}</p>{limit > 0 && spent < limit && daysRemaining !== null && (<p className="text-xs text-blue-300 mt-1 italic">{daysRemaining} days until over budget</p>)}</div>)
@@ -417,7 +417,7 @@ export default function App() {
 
         {activeTab==="profile" && (
           <motion.div initial={{opacity:0}} animate={{opacity:1}} className="max-w-4xl mx-auto space-y-6">
-            <div className="p-8 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-2xl border border-white/10 flex items-center gap-6">
+            <div className="p-6 md:p-8 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-2xl border border-white/10 flex flex-col md:flex-row items-center gap-6">
               <div className="h-24 w-24 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center text-3xl font-bold border-4 border-white/10">
                 {user.username.charAt(0).toUpperCase()}
               </div>
@@ -431,7 +431,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               <div className="p-6 bg-white/5 rounded-xl border border-white/5">
                 <Wallet className="text-blue-400 mb-2" size={24}/>
                 <p className="text-gray-400 text-sm">Monthly Allocation</p>
@@ -452,14 +452,14 @@ export default function App() {
             <div className="p-6 bg-white/5 rounded-xl border border-white/5">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2"><Settings size={18}/> Account Settings</h3>
               <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 bg-black/20 rounded-lg">
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 p-4 bg-black/20 rounded-lg">
                   <div>
                     <p className="font-bold">Export Personal Data</p>
                     <p className="text-xs text-gray-400">Download all transaction logs as a single JSON file</p>
                   </div>
                   <button onClick={() => downloadPDF("Full_Data_Export", {user, expenses, archives})} className="bg-white/10 px-4 py-2 rounded text-sm hover:bg-white/20 transition">Export</button>
                 </div>
-                <div className="flex justify-between items-center p-4 bg-black/20 rounded-lg border border-red-500/10">
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 p-4 bg-black/20 rounded-lg border border-red-500/10">
                   <div>
                     <p className="font-bold text-red-400">System Reset</p>
                     <p className="text-xs text-gray-400">Wipe all local and cloud data associated with this ID</p>
